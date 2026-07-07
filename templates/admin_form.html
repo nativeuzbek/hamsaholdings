@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if car %}Tahrirlash{% else %}Yangi mashina{% endif %} | Admin | Hamsa Holdings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="admin-body">
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <a href="/" class="admin-sidebar-logo">
+                    <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings">
+                </a>
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="admin-sidebar-nav">
+                <a href="/admin" class="admin-nav-link">
+                    <i class="fa-solid fa-car"></i> Mashinalar
+                </a>
+                <a href="/" class="admin-nav-link" target="_blank">
+                    <i class="fa-solid fa-globe"></i> Saytni ko'rish
+                </a>
+                <a href="/admin/add" class="admin-nav-link add-link {% if not car %}active{% endif %}">
+                    <i class="fa-solid fa-plus"></i> Yangi qo'shish
+                </a>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <div class="admin-user-info">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>{{ session.get('username', 'Admin') }}</span>
+                </div>
+                <a href="/admin/logout" class="admin-logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-topbar">
+                <h1>
+                    <i class="fa-solid {% if car %}fa-pen-to-square{% else %}fa-plus-circle{% endif %}"></i>
+                    {% if car %}{{ car.brand }} {{ car.model }} — Tahrirlash{% else %}Yangi mashina qo'shish{% endif %}
+                </h1>
+                <a href="/admin" class="admin-btn admin-btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Orqaga
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="admin-alert admin-alert-{{ category }}">
+                <i class="fa-solid {% if category == 'success' %}fa-circle-check{% elif category == 'danger' %}fa-circle-xmark{% else %}fa-circle-info{% endif %}"></i>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{% if car %}/admin/edit/{{ car.id }}{% else %}/admin/add{% endif %}" class="admin-form">
+                <div class="admin-form-grid">
+                    <!-- Column 1: Basic Info -->
+                    <div class="admin-form-section">
+                        <h3><i class="fa-solid fa-circle-info"></i> Asosiy ma'lumotlar</h3>
+
+                        <div class="admin-field">
+                            <label for="brand">Brend *</label>
+                            <select id="brand" name="brand" required>
+                                <option value="">Tanlang...</option>
+                                {% for b in ['Genesis','Hyundai','Kia','Chevrolet','Ssangyong','Renault','BMW','Mercedes-Benz','Volkswagen','Toyota'] %}
+                                <option value="{{ b }}" {% if car and car.brand == b %}selected{% endif %}>{{ b }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="admin-field">
+                            <label for="model">Model *</label>
+                            <input type="text" id="model" name="model" value="{{ car.model if car else '' }}" placeholder="G80, Palisade..." required>
+                        </div>
+
+                        <div class="admin-field-row">
+                            <div class="admin-field">
+                                <label for="year">Yil *</label>
+                                <input type="number" id="year" name="year" value="{{ car.year if car else 2024 }}" min="1990" max="2030" required>
+                            </div>
+                            <div class="admin-field">
+                                <label for="mileage">Yurgan (km)</label>
+                                <input type="number" id="mileage" name="mileage" value="{{ car.mileage if car else 0 }}" min="0">
+                            </div>
+                        </div>
+
+                        <div class="admin-field-row">
+                            <div class="admin-field">
+                                <label for="price">Narx ($) *</label>
+                                <input type="number" id="price" name="price" value="{{ car.price if car else '' }}" min="0" required>
+                            </div>
+                            <div class="admin-field">
+                                <label for="condition">Holat *</label>
+                                <select id="condition" name="condition" required>
+                                    <option value="New" {% if car and car.condition == 'New' %}selected{% endif %}>Yangi (New)</option>
+                                    <option value="Used" {% if car and car.condition == 'Used' %}selected{% endif %}>Ishlatilgan (Used)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Technical -->
+                    <div class="admin-form-section">
+                        <h3><i class="fa-solid fa-gears"></i> Texnik xususiyatlar</h3>
+
+                        <div class="admin-field">
+                            <label for="fuel">Yoqilg'i</label>
+                            <select id="fuel" name="fuel">
+                                {% for f in ['Gasoline','Diesel','Electric','Hybrid','LPG'] %}
+                                <option value="{{ f }}" {% if car and car.fuel == f %}selected{% endif %}>{{ f }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="admin-field">
+                            <label for="transmission">Uzatish</label>
+                            <select id="transmission" name="transmission">
+                                <option value="Automatic" {% if car and car.transmission == 'Automatic' %}selected{% endif %}>Automatic</option>
+                                <option value="Manual" {% if car and car.transmission == 'Manual' %}selected{% endif %}>Manual</option>
+                            </select>
+                        </div>
+
+                        <div class="admin-field">
+                            <label for="engine">Dvigatel</label>
+                            <input type="text" id="engine" name="engine" value="{{ car.engine if car else '' }}" placeholder="2.5L Turbo">
+                        </div>
+
+                        <div class="admin-field-row">
+                            <div class="admin-field">
+                                <label for="color">Rang</label>
+                                <input type="text" id="color" name="color" value="{{ car.color if car else '' }}" placeholder="Black, White...">
+                            </div>
+                            <div class="admin-field">
+                                <label for="driveType">Yurg'izish</label>
+                                <select id="driveType" name="driveType">
+                                    {% for d in ['FWD','AWD','RWD','4WD'] %}
+                                    <option value="{{ d }}" {% if car and car.driveType == d %}selected{% endif %}>{{ d }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="admin-field">
+                            <label for="bodyType">Kuzov turi</label>
+                            <select id="bodyType" name="bodyType">
+                                {% for bt in ['sedan','suv','compact','van','truck','electric','hybrid','bus'] %}
+                                <option value="{{ bt }}" {% if car and car.bodyType == bt %}selected{% endif %}>{{ bt|capitalize }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Media & Description -->
+                    <div class="admin-form-section">
+                        <h3><i class="fa-solid fa-image"></i> Media va tavsif</h3>
+
+                        <div class="admin-field">
+                            <label for="image">Rasm fayl nomi</label>
+                            <select id="image" name="image">
+                                {% for img in ['images/genesis_g80.jpg','images/hyundai_palisade.jpg','images/kia_ev6.jpg'] %}
+                                <option value="{{ img }}" {% if car and car.image == img %}selected{% endif %}>{{ img }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="admin-img-preview" id="imgPreview">
+                            <img src="/static/{{ car.image if car else 'images/genesis_g80.jpg' }}" alt="Preview" id="previewImg">
+                        </div>
+
+                        <div class="admin-field">
+                            <label for="features">Xususiyatlar <small>(vergul bilan ajrating)</small></label>
+                            <textarea id="features" name="features" rows="3" placeholder="Leather Seats, Panoramic Sunroof, Cruise Control...">{% if car %}{{ car.features|join(', ') }}{% endif %}</textarea>
+                        </div>
+
+                        <div class="admin-field">
+                            <label for="description">Tavsif</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Mashina haqida qisqacha ma'lumot...">{{ car.description if car else '' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-form-actions">
+                    <a href="/admin" class="admin-btn admin-btn-secondary">
+                        <i class="fa-solid fa-xmark"></i> Bekor qilish
+                    </a>
+                    <button type="submit" class="admin-btn admin-btn-primary">
+                        <i class="fa-solid {% if car %}fa-floppy-disk{% else %}fa-plus{% endif %}"></i>
+                        {% if car %}Saqlash{% else %}Qo'shish{% endif %}
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+    // Image preview on select change
+    document.getElementById('image').addEventListener('change', function() {
+        document.getElementById('previewImg').src = '/static/' + this.value;
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+# Netlify Configuration for Hamsa Holdings
+[build]
+  publish = "dist"
+
+# Pretty URLs (trailing slash)
+[[redirects]]
+  from = "/inventory"
+  to = "/inventory/"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/shipping"
+  to = "/shipping/"
+  status = 301
+
+[[redirects]]
+  from = "/how-it-works"
+  to = "/how-it-works/"
+  status = 301
+
+# Custom 404
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404

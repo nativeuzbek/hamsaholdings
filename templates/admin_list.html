@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Hamsa Holdings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- Admin Sidebar -->
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <a href="/" class="admin-sidebar-logo">
+                    <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings">
+                </a>
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="admin-sidebar-nav">
+                <a href="/admin" class="admin-nav-link active">
+                    <i class="fa-solid fa-car"></i> Mashinalar
+                </a>
+                <a href="/" class="admin-nav-link" target="_blank">
+                    <i class="fa-solid fa-globe"></i> Saytni ko'rish
+                </a>
+                <a href="/admin/add" class="admin-nav-link add-link">
+                    <i class="fa-solid fa-plus"></i> Yangi qo'shish
+                </a>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <div class="admin-user-info">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>{{ session.get('username', 'Admin') }}</span>
+                </div>
+                <a href="/admin/logout" class="admin-logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-topbar">
+                <h1><i class="fa-solid fa-gauge-high"></i> Dashboard</h1>
+                <a href="/admin/add" class="admin-btn admin-btn-primary">
+                    <i class="fa-solid fa-plus"></i> Yangi mashina qo'shish
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="admin-alert admin-alert-{{ category }}">
+                <i class="fa-solid {% if category == 'success' %}fa-circle-check{% elif category == 'danger' %}fa-circle-xmark{% elif category == 'warning' %}fa-triangle-exclamation{% else %}fa-circle-info{% endif %}"></i>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <!-- Stats Cards -->
+            <div class="admin-stats-row">
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon"><i class="fa-solid fa-car"></i></div>
+                    <div class="admin-stat-info">
+                        <span class="admin-stat-number">{{ cars|length }}</span>
+                        <span class="admin-stat-label">Jami mashinalar</span>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon new"><i class="fa-solid fa-certificate"></i></div>
+                    <div class="admin-stat-info">
+                        <span class="admin-stat-number">{{ cars|selectattr('condition', 'equalto', 'New')|list|length }}</span>
+                        <span class="admin-stat-label">Yangi</span>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon used"><i class="fa-solid fa-rotate"></i></div>
+                    <div class="admin-stat-info">
+                        <span class="admin-stat-number">{{ cars|selectattr('condition', 'equalto', 'Used')|list|length }}</span>
+                        <span class="admin-stat-label">Ishlatilgan</span>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon brands"><i class="fa-solid fa-tags"></i></div>
+                    <div class="admin-stat-info">
+                        <span class="admin-stat-number">{{ cars|map(attribute='brand')|unique|list|length }}</span>
+                        <span class="admin-stat-label">Brendlar</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cars Table -->
+            <div class="admin-table-container">
+                <div class="admin-table-header">
+                    <h2><i class="fa-solid fa-list"></i> Mashinalar ro'yxati</h2>
+                    <div class="admin-search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="adminSearchInput" placeholder="Qidirish..." oninput="filterAdminTable()">
+                    </div>
+                </div>
+                <table class="admin-table" id="adminTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Rasm</th>
+                            <th>Brend</th>
+                            <th>Model</th>
+                            <th>Yil</th>
+                            <th>Narx</th>
+                            <th>Holat</th>
+                            <th>Turi</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for car in cars %}
+                        <tr class="admin-table-row">
+                            <td class="admin-td-id">{{ car.id }}</td>
+                            <td class="admin-td-img">
+                                <img src="/static/{{ car.image }}" alt="{{ car.brand }} {{ car.model }}">
+                            </td>
+                            <td class="admin-td-brand">{{ car.brand }}</td>
+                            <td class="admin-td-model">{{ car.model }}</td>
+                            <td>{{ car.year }}</td>
+                            <td class="admin-td-price">${{ '{:,}'.format(car.price) }}</td>
+                            <td>
+                                <span class="admin-badge {% if car.condition == 'New' %}badge-new{% else %}badge-used{% endif %}">
+                                    {{ car.condition }}
+                                </span>
+                            </td>
+                            <td class="admin-td-type">{{ car.bodyType }}</td>
+                            <td class="admin-td-actions">
+                                <a href="/car/{{ car.id }}" target="_blank" class="admin-action-btn view" title="Ko'rish">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="/admin/edit/{{ car.id }}" class="admin-action-btn edit" title="Tahrirlash">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <form method="POST" action="/admin/delete/{{ car.id }}" style="display:inline" onsubmit="return confirm('Haqiqatan ham o\'chirmoqchimisiz?');">
+                                    <button type="submit" class="admin-action-btn delete" title="O'chirish">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    function filterAdminTable() {
+        const query = document.getElementById('adminSearchInput').value.toLowerCase();
+        const rows = document.querySelectorAll('#adminTable tbody tr');
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hamsa Holdings - Professional Korean Automobile Export. Exporting new and used Hyundai, Kia, Genesis, and other brand cars from South Korea globally. 10+ years of trust.">
+    <title>Inventory | Hamsa Holdings Premium Korean Car Export</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="/" class="logo-area">
+                <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings Logo" class="nav-logo">
+                <span class="logo-text">HAMSA <span class="accent-text">HOLDINGS</span></span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/inventory" class="nav-link active">Inventory</a>
+                <a href="/how-it-works" class="nav-link">How It Works</a>
+                <a href="/shipping" class="nav-link">Shipping</a>
+                <a href="/about" class="nav-link">About Us</a>
+                <a href="/contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="lang-selector">
+                    <span class="active-lang">EN</span>
+                    <i class="fa-solid fa-chevron-down lang-chevron"></i>
+                    <div class="lang-dropdown">
+                        <a href="#" class="lang-option" data-lang="en">English</a>
+                        <a href="#" class="lang-option" data-lang="uz">O'zbekcha</a>
+                        <a href="#" class="lang-option" data-lang="ru">Русский</a>
+                    </div>
+                </div>
+                <a href="https://wa.me/+8210-6771-9498" target="_blank" class="btn btn-primary btn-nav">
+                    <i class="fa-brands fa-whatsapp"></i> Inquiry
+                </a>
+                <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title Header -->
+    <div style="padding-top: 100px; text-align: center; margin-bottom: -40px;">
+        <h1 class="section-title">Full Vehicle Inventory</h1>
+        <p class="section-desc">Search, filter and find your ideal vehicle from South Korea.</p>
+    </div>
+
+    <!-- Inventory / Car Catalog -->
+    <section id="catalog" class="catalog-section section">
+        <div class="container">
+            <!-- Filter Controls -->
+            <div class="filter-panel">
+                <!-- Brand Logo Grid -->
+                <div class="brand-logo-grid" id="brandLogoGrid">
+                    <h4 class="filter-section-title"><i class="fa-solid fa-car"></i> Popular Brands</h4>
+                    <div class="brand-logos">
+                        <button class="brand-logo-btn active" data-brand="all" title="All Brands">
+                            <i class="fa-solid fa-border-all"></i>
+                            <span>All</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Hyundai" title="Hyundai">
+                            <img src="https://www.carlogos.org/car-logos/hyundai-logo.png" alt="Hyundai">
+                            <span>Hyundai</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Kia" title="Kia">
+                            <img src="https://www.carlogos.org/car-logos/kia-logo.png" alt="Kia">
+                            <span>Kia</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Genesis" title="Genesis">
+                            <img src="https://www.carlogos.org/car-logos/genesis-logo.png" alt="Genesis">
+                            <span>Genesis</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Chevrolet" title="Chevrolet">
+                            <img src="https://www.carlogos.org/car-logos/chevrolet-logo.png" alt="Chevrolet">
+                            <span>Chevrolet</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Ssangyong" title="Ssangyong">
+                            <img src="https://www.carlogos.org/car-logos/ssangyong-logo.png" alt="Ssangyong">
+                            <span>Ssangyong</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Renault" title="Renault">
+                            <img src="https://www.carlogos.org/car-logos/renault-logo.png" alt="Renault">
+                            <span>Renault</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="BMW" title="BMW">
+                            <img src="https://www.carlogos.org/car-logos/bmw-logo.png" alt="BMW">
+                            <span>BMW</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Mercedes" title="Mercedes-Benz">
+                            <img src="https://www.carlogos.org/car-logos/mercedes-benz-logo.png" alt="Mercedes">
+                            <span>Mercedes</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Volkswagen" title="Volkswagen">
+                            <img src="https://www.carlogos.org/car-logos/volkswagen-logo.png" alt="VW">
+                            <span>VW</span>
+                        </button>
+                        <button class="brand-logo-btn" data-brand="Toyota" title="Toyota">
+                            <img src="https://www.carlogos.org/car-logos/toyota-logo.png" alt="Toyota">
+                            <span>Toyota</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Advanced Search Row -->
+                <div class="advanced-filters">
+                    <div class="filter-row">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" id="searchInput" placeholder="Search by model, brand, year...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Sort By:</label>
+                            <select id="sortSelect" class="filter-select">
+                                <option value="default">Featured</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="year-desc">Year: Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Type Filter -->
+                <div class="body-type-filter">
+                    <h4 class="filter-section-title"><i class="fa-solid fa-shapes"></i> Body Type</h4>
+                    <div class="body-type-grid" id="bodyTypeFilter">
+                        <button class="body-type-btn active" data-bodytype="all">
+                            <i class="fa-solid fa-border-all"></i>
+                            <span>All Types</span>
+                        </button>
+                        <button class="body-type-btn" data-bodytype="sedan">
+                            <i class="fa-solid fa-car-side"></i>
+                            <span>Sedan</span>
+                        </button>
+                        <button class="body-type-btn" data-bodytype="suv">
+                            <i class="fa-solid fa-truck-monster"></i>
+                            <span>SUV</span>
+                        </button>
+                        <button class="body-type-btn" data-bodytype="compact">
+                            <i class="fa-solid fa-car"></i>
+                            <span>Compact</span>
+                        </button>
+                        <button class="body-type-btn" data-bodytype="van">
+                            <i class="fa-solid fa-van-shuttle"></i>
+                            <span>VAN</span>
+                        </button>
+                        <button class="body-type-btn" data-bodytype="truck">
+                            <i class="fa-solid fa-truck"></i>
+                            <span>Truck</span>
+                        </button>
+                        <button class="body-type-btn" data-bodytype="electric">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>Electric</span>
+                        </button>
+                        <button class="body-type-btn" data-bodytype="hybrid">
+                            <i class="fa-solid fa-leaf"></i>
+                            <span>Hybrid</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Budget Range & Condition -->
+                <div class="budget-condition-row">
+                    <div class="budget-filter">
+                        <h4 class="filter-section-title"><i class="fa-solid fa-dollar-sign"></i> Budget Range</h4>
+                        <div class="budget-chips" id="budgetFilter">
+                            <button class="budget-chip active" data-min="0" data-max="999999">All Prices</button>
+                            <button class="budget-chip" data-min="0" data-max="5000">Under $5K</button>
+                            <button class="budget-chip" data-min="5000" data-max="10000">$5K - $10K</button>
+                            <button class="budget-chip" data-min="10000" data-max="20000">$10K - $20K</button>
+                            <button class="budget-chip" data-min="20000" data-max="35000">$20K - $35K</button>
+                            <button class="budget-chip" data-min="35000" data-max="999999">$35K+</button>
+                        </div>
+                    </div>
+                    <div class="condition-filter">
+                        <h4 class="filter-section-title"><i class="fa-solid fa-certificate"></i> Condition</h4>
+                        <div class="toggle-switch" id="conditionFilter">
+                            <button class="toggle-btn active" data-condition="all">All</button>
+                            <button class="toggle-btn" data-condition="New">New</button>
+                            <button class="toggle-btn" data-condition="Used">Used</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Filters & Results Count -->
+                <div class="results-bar" id="resultsBar">
+                    <span class="results-count"><strong id="resultsCount">24</strong> vehicles found</span>
+                    <button class="clear-filters-btn" id="clearFiltersBtn"><i class="fa-solid fa-xmark"></i> Clear All Filters</button>
+                </div>
+            </div>
+
+            <!-- Car Grid -->
+            <div class="car-grid" id="carGrid">
+                <!-- Javascript will render cards here dynamically -->
+            </div>
+            
+            <div class="catalog-footer">
+                <p>Don't see what you are looking for? We source specific models upon custom request.</p>
+                <a href="/contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Request Custom Search</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col-brand">
+                <div class="logo-area">
+                    <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings Logo" class="footer-logo">
+                    <span class="logo-text">HAMSA <span class="accent-text">HOLDINGS</span></span>
+                </div>
+                <p class="footer-tagline">Licensed and professional automobile exporter in South Korea. Exporting quality passenger and luxury cars worldwide.</p>
+                <p class="footer-copyright">&copy; 2026 Hamsa Holdings Co., Ltd. All Rights Reserved. <br>Domain: www.hamsaholdings.com</p>
+            </div>
+            
+            <div class="footer-col-links">
+                <h4>Quick Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/inventory">Vehicle Inventory</a></li>
+                    <li><a href="/how-it-works">Export Process</a></li>
+                    <li><a href="/contact">Contact Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col-links">
+                <h4>Popular Brands</h4>
+                <ul class="footer-links-list">
+                    <li><a href="/inventory" onclick="filterByBrand('Genesis')">Genesis Luxury</a></li>
+                    <li><a href="/inventory" onclick="filterByBrand('Hyundai')">Hyundai Cars</a></li>
+                    <li><a href="/inventory" onclick="filterByBrand('Kia')">Kia SUVs & EVs</a></li>
+                    <li><a href="/inventory" onclick="filterByBrand('all')">View All Stock</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vehicle Details Modal -->
+    <div class="modal" id="carModal" aria-hidden="true" role="dialog">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-wrapper">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close details modal">&times;</button>
+            <div class="modal-content-grid" id="modalContent">
+                <!-- Javascript will inject data dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Floating WhatsApp Bubble -->
+    <a href="https://wa.me/+8210-6771-9498" target="_blank" class="whatsapp-bubble" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with us!</span>
+    </a>
+
+    <!-- Scripts -->
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>

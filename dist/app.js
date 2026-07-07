@@ -5,11 +5,52 @@
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // --- State variables ---
-    let currentBrandFilter = "all";
-    let currentConditionFilter = "all";
-    let searchQuery = "";
-    let currentSort = "default";
+    // --- State: unified filter object ---
+    let activeFilters = {
+        brand: 'all',
+        bodyType: 'all',
+        budgetMin: 0,
+        budgetMax: 999999,
+        condition: 'all',
+        search: ''
+    };
+
+    // --- Parse URL Parameters for cross-page filtering ---
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('brand') && urlParams.get('brand') !== 'all') activeFilters.brand = urlParams.get('brand');
+    if (urlParams.has('model') && urlParams.get('model') !== 'all') activeFilters.search = urlParams.get('model');
+    if (urlParams.has('budgetMax')) activeFilters.budgetMax = Number(urlParams.get('budgetMax'));
+
+    // --- Hero Search Widget Initialization ---
+    const heroBrandSelect = document.getElementById("heroBrandSelect");
+    const heroModelSelect = document.getElementById("heroModelSelect");
+    
+    if (heroBrandSelect && heroModelSelect && typeof CARS_DATA !== 'undefined') {
+        const uniqueBrands = [...new Set(CARS_DATA.map(car => car.brand))].sort();
+        uniqueBrands.forEach(brand => {
+            const option = document.createElement("option");
+            option.value = brand;
+            option.textContent = brand;
+            heroBrandSelect.appendChild(option);
+        });
+        
+        heroBrandSelect.addEventListener("change", (e) => {
+            const selectedBrand = e.target.value;
+            heroModelSelect.innerHTML = '<option value="all">All Models</option>';
+            if (selectedBrand === 'all') {
+                heroModelSelect.disabled = true;
+            } else {
+                heroModelSelect.disabled = false;
+                const brandModels = [...new Set(CARS_DATA.filter(car => car.brand === selectedBrand).map(car => car.model))].sort();
+                brandModels.forEach(model => {
+                    const option = document.createElement("option");
+                    option.value = model;
+                    option.textContent = model;
+                    heroModelSelect.appendChild(option);
+                });
+            }
+        });
+    }
 
     // --- DOM Elements ---
     const header = document.querySelector(".header");
@@ -18,8 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const carGrid = document.getElementById("carGrid");
     const searchInput = document.getElementById("searchInput");
     const sortSelect = document.getElementById("sortSelect");
-    const brandFilters = document.getElementById("brandFilters");
+    const brandLogoGrid = document.getElementById("brandLogoGrid");
+    const bodyTypeFilter = document.getElementById("bodyTypeFilter");
+    const budgetFilter = document.getElementById("budgetFilter");
     const conditionFilter = document.getElementById("conditionFilter");
+    const resultsCount = document.getElementById("resultsCount");
+    const clearFiltersBtn = document.getElementById("clearFiltersBtn");
     
     // Modal Elements
     const carModal = document.getElementById("carModal");
@@ -134,94 +179,160 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".details-trigger").forEach(btn => {
             btn.addEventListener("click", () => {
                 const carId = btn.getAttribute("data-id");
-                openModal(carId);
+                window.location.href = '/car/' + carId;
             });
         });
     }
 
-    // Main Filter Logic
+    // Master Filter Logic (unified)
     function applyFilters() {
-        let filtered = [...CARS_DATA];
+        let filtered = CARS_DATA.filter(car => {
+            // Brand filter
+            if (activeFilters.brand !== 'all' && car.brand !== activeFilters.brand) return false;
+            // Body type filter
+            if (activeFilters.bodyType !== 'all' && car.bodyType !== activeFilters.bodyType) return false;
+            // Budget filter
+            if (car.price < activeFilters.budgetMin || car.price > activeFilters.budgetMax) return false;
+            // Condition filter
+            if (activeFilters.condition !== 'all' && car.condition !== activeFilters.condition) return false;
+            // Search filter
+            if (activeFilters.search) {
+                const q = activeFilters.search.toLowerCase();
+                const searchable = `${car.brand} ${car.model} ${car.year} ${car.fuel} ${car.bodyType || ''} ${car.color}`.toLowerCase();
+                if (!searchable.includes(q)) return false;
+            }
+            return true;
+        });
 
-        // Apply Brand filter
-        if (currentBrandFilter !== "all") {
-            filtered = filtered.filter(car => car.brand.toLowerCase() === currentBrandFilter.toLowerCase());
-        }
-
-        // Apply Condition filter
-        if (currentConditionFilter !== "all") {
-            filtered = filtered.filter(car => car.condition.toLowerCase() === currentConditionFilter.toLowerCase());
-        }
-
-        // Apply Search query filter
-        if (searchQuery.trim() !== "") {
-            const query = searchQuery.toLowerCase();
-            filtered = filtered.filter(car => 
-                car.brand.toLowerCase().includes(query) ||
-                car.model.toLowerCase().includes(query) ||
-                car.year.toString().includes(query) ||
-                car.fuel.toLowerCase().includes(query) ||
-                car.transmission.toLowerCase().includes(query)
-            );
-        }
-
-        // Apply Sorting
-        if (currentSort === "price-asc") {
-            filtered.sort((a, b) => a.price - b.price);
-        } else if (currentSort === "price-desc") {
-            filtered.sort((a, b) => b.price - a.price);
-        } else if (currentSort === "year-desc") {
-            filtered.sort((a, b) => b.year - a.year);
-        }
+        // Sort
+        const sortVal = sortSelect ? sortSelect.value : 'default';
+        if (sortVal === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+        else if (sortVal === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+        else if (sortVal === 'year-desc') filtered.sort((a, b) => b.year - a.year);
 
         renderInventory(filtered);
+
+        // Update results count
+        if (resultsCount) resultsCount.textContent = filtered.length;
     }
 
     // --- 4. Event Listeners for Filters ---
-    
-    // Search input
-    searchInput.addEventListener("input", (e) => {
-        searchQuery = e.target.value;
-        applyFilters();
-    });
 
-    // Sort select
-    sortSelect.addEventListener("change", (e) => {
-        currentSort = e.target.value;
-        applyFilters();
-    });
+    // Helper: activate a button within a group and deactivate siblings
+    function setActiveButton(container, selector, clickedBtn) {
+        if (!container) return;
+        container.querySelectorAll(selector).forEach(btn => btn.classList.remove('active'));
+        clickedBtn.classList.add('active');
+    }
 
-    // Brand tag buttons
-    brandFilters.addEventListener("click", (e) => {
-        if (e.target.classList.contains("filter-tag")) {
-            // Toggle active classes
-            document.querySelectorAll(".filter-tag").forEach(tag => tag.classList.remove("active"));
-            e.target.classList.add("active");
-
-            currentBrandFilter = e.target.getAttribute("data-brand");
+    // 4a. Brand logo buttons
+    if (brandLogoGrid) {
+        brandLogoGrid.addEventListener('click', (e) => {
+            const btn = e.target.closest('.brand-logo-btn');
+            if (!btn) return;
+            setActiveButton(brandLogoGrid, '.brand-logo-btn', btn);
+            activeFilters.brand = btn.getAttribute('data-brand') || 'all';
             applyFilters();
-        }
-    });
+        });
+    }
 
-    // Condition toggle buttons
-    conditionFilter.addEventListener("click", (e) => {
-        if (e.target.classList.contains("toggle-btn")) {
-            // Toggle active classes
-            document.querySelectorAll(".toggle-btn").forEach(btn => btn.classList.remove("active"));
-            e.target.classList.add("active");
-
-            currentConditionFilter = e.target.getAttribute("data-condition");
+    // 4b. Body type buttons
+    if (bodyTypeFilter) {
+        bodyTypeFilter.addEventListener('click', (e) => {
+            const btn = e.target.closest('.body-type-btn');
+            if (!btn) return;
+            setActiveButton(bodyTypeFilter, '.body-type-btn', btn);
+            activeFilters.bodyType = btn.getAttribute('data-bodytype') || 'all';
             applyFilters();
-        }
-    });
+        });
+    }
+
+    // 4c. Budget chips
+    if (budgetFilter) {
+        budgetFilter.addEventListener('click', (e) => {
+            const btn = e.target.closest('.budget-chip');
+            if (!btn) return;
+            setActiveButton(budgetFilter, '.budget-chip', btn);
+            activeFilters.budgetMin = Number(btn.getAttribute('data-min')) || 0;
+            activeFilters.budgetMax = Number(btn.getAttribute('data-max')) || 999999;
+            applyFilters();
+        });
+    }
+
+    // 4d. Condition toggle buttons
+    if (conditionFilter) {
+        conditionFilter.addEventListener('click', (e) => {
+            const btn = e.target.closest('.toggle-btn');
+            if (!btn) return;
+            setActiveButton(conditionFilter, '.toggle-btn', btn);
+            activeFilters.condition = btn.getAttribute('data-condition') || 'all';
+            applyFilters();
+        });
+    }
+
+    // 4e. Search input (debounced)
+    let searchDebounceTimer = null;
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                activeFilters.search = e.target.value;
+                applyFilters();
+            }, 300);
+        });
+    }
+
+    // 4f. Sort select
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+            applyFilters();
+        });
+    }
+
+    // 4g. Clear all filters button
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', () => {
+            // Reset state
+            activeFilters = {
+                brand: 'all',
+                bodyType: 'all',
+                budgetMin: 0,
+                budgetMax: 999999,
+                condition: 'all',
+                search: ''
+            };
+
+            // Reset UI – remove .active from all filter buttons
+            document.querySelectorAll('.brand-logo-btn.active, .body-type-btn.active, .budget-chip.active, .toggle-btn.active').forEach(btn => btn.classList.remove('active'));
+
+            // Set 'all' buttons as active
+            const allBrandBtn = document.querySelector('.brand-logo-btn[data-brand="all"]');
+            if (allBrandBtn) allBrandBtn.classList.add('active');
+            const allBodyBtn = document.querySelector('.body-type-btn[data-bodytype="all"]');
+            if (allBodyBtn) allBodyBtn.classList.add('active');
+            const allBudgetBtn = document.querySelector('.budget-chip[data-min="0"]');
+            if (allBudgetBtn) allBudgetBtn.classList.add('active');
+            const allCondBtn = document.querySelector('.toggle-btn[data-condition="all"]');
+            if (allCondBtn) allCondBtn.classList.add('active');
+
+            // Clear search input
+            if (searchInput) searchInput.value = '';
+
+            // Reset sort
+            if (sortSelect) sortSelect.value = 'default';
+
+            applyFilters();
+        });
+    }
 
     // Global Brand Filter utility (for footer links/navigation overrides)
     window.filterByBrand = function(brandName) {
-        const tag = document.querySelector(`.filter-tag[data-brand="${brandName}"]`);
-        if (tag) {
-            tag.click();
-        } else if (brandName === "all") {
-            document.querySelector('.filter-tag[data-brand="all"]').click();
+        const btn = document.querySelector(`.brand-logo-btn[data-brand="${brandName}"]`);
+        if (btn) {
+            btn.click();
+        } else if (brandName === 'all') {
+            const allBtn = document.querySelector('.brand-logo-btn[data-brand="all"]');
+            if (allBtn) allBtn.click();
         }
     };
 
@@ -349,5 +460,60 @@ Details:
     });
 
     // --- Initial Call ---
-    renderInventory(CARS_DATA);
+    // If URL params set filters, visually update the UI to match
+    if (activeFilters.brand !== 'all') {
+        const brandBtn = document.querySelector(`.brand-logo-btn[data-brand="${activeFilters.brand}"]`);
+        if (brandBtn) {
+            document.querySelectorAll('.brand-logo-btn').forEach(btn => btn.classList.remove('active'));
+            brandBtn.classList.add('active');
+        }
+    }
+    if (activeFilters.budgetMax !== 999999) {
+        const budgetBtn = document.querySelector(`.budget-chip[data-max="${activeFilters.budgetMax}"]`);
+        if (budgetBtn) {
+            document.querySelectorAll('.budget-chip').forEach(btn => btn.classList.remove('active'));
+            budgetBtn.classList.add('active');
+        }
+    }
+    if (activeFilters.search !== '') {
+        if (searchInput) searchInput.value = activeFilters.search;
+    }
+
+    applyFilters();
+
+    // --- CEO Message Accordion ---
+    const ceoToggleBtn = document.getElementById('ceoToggleBtn');
+    const ceoContent = document.getElementById('ceoContent');
+    const ceoChevron = document.getElementById('ceoChevron');
+
+    if (ceoToggleBtn && ceoContent && ceoChevron) {
+        ceoToggleBtn.addEventListener('click', () => {
+            const isOpen = ceoContent.classList.contains('open');
+
+            if (isOpen) {
+                // Close
+                ceoContent.style.maxHeight = '0px';
+                ceoContent.classList.remove('open');
+                ceoToggleBtn.classList.remove('active');
+                ceoChevron.classList.remove('rotated');
+                ceoToggleBtn.setAttribute('aria-expanded', 'false');
+                ceoContent.setAttribute('aria-hidden', 'true');
+            } else {
+                // Open
+                ceoContent.classList.add('open');
+                ceoToggleBtn.classList.add('active');
+                ceoChevron.classList.add('rotated');
+                ceoToggleBtn.setAttribute('aria-expanded', 'true');
+                ceoContent.setAttribute('aria-hidden', 'false');
+                
+                // Measure and set max-height for smooth animation
+                ceoContent.style.maxHeight = ceoContent.scrollHeight + 'px';
+
+                // Smooth scroll into view after animation
+                setTimeout(() => {
+                    ceoToggleBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 350);
+            }
+        });
+    }
 });

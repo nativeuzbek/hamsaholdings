@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Hamsa Holdings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="admin-body">
+
+    <div class="admin-login-container">
+        <div class="admin-login-card">
+            <div class="admin-login-header">
+                <a href="/" class="admin-login-logo">
+                    <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings" class="admin-logo-img">
+                </a>
+                <h1>Admin Panel</h1>
+                <p>Boshqaruv paneliga kirish</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="admin-alert admin-alert-{{ category }}">
+                <i class="fa-solid {% if category == 'success' %}fa-circle-check{% elif category == 'danger' %}fa-circle-xmark{% elif category == 'warning' %}fa-triangle-exclamation{% else %}fa-circle-info{% endif %}"></i>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="/admin/login" class="admin-login-form">
+                <div class="admin-input-group">
+                    <label for="username">
+                        <i class="fa-solid fa-user"></i> Login
+                    </label>
+                    <input type="text" id="username" name="username" placeholder="admin" required autofocus>
+                </div>
+                <div class="admin-input-group">
+                    <label for="password">
+                        <i class="fa-solid fa-lock"></i> Parol
+                    </label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="admin-login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Kirish
+                </button>
+            </form>
+
+            <div class="admin-login-footer">
+                <a href="/"><i class="fa-solid fa-arrow-left"></i> Asosiy saytga qaytish</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

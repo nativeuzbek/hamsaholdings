@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hamsa Holdings - Professional Korean Automobile Export. Exporting new and used Hyundai, Kia, Genesis, and other brand cars from South Korea globally. 10+ years of trust.">
+    <meta name="keywords" content="Korean car export, buy cars from Korea, used cars South Korea, Hyundai export, Kia export, Genesis export, Hamsa Holdings">
+    <title>Hamsa Holdings | Premium Korean Car Export</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="/" class="logo-area">
+                <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings Logo" class="nav-logo">
+                <span class="logo-text">HAMSA <span class="accent-text">HOLDINGS</span></span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/inventory" class="nav-link">Inventory</a>
+                <a href="/how-it-works" class="nav-link">How It Works</a>
+                <a href="/shipping" class="nav-link">Shipping</a>
+                <a href="/about" class="nav-link" target="_blank">About Us</a>
+                <a href="/contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="lang-selector">
+                    <span class="active-lang">EN</span>
+                    <i class="fa-solid fa-chevron-down lang-chevron"></i>
+                    <div class="lang-dropdown">
+                        <a href="#" class="lang-option" data-lang="en">English</a>
+                        <a href="#" class="lang-option" data-lang="uz">O'zbekcha</a>
+                        <a href="#" class="lang-option" data-lang="ru">Русский</a>
+                    </div>
+                </div>
+                <a href="https://wa.me/+8210-6771-9498" target="_blank" class="btn btn-primary btn-nav">
+                    <i class="fa-brands fa-whatsapp"></i> Inquiry
+                </a>
+                <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fa-solid fa-award"></i> 10+ Years Sourcing in South Korea</span>
+                <h1 class="hero-title">Direct Automobile Export <br><span class="gradient-text">From Korea to the World</span></h1>
+                <p class="hero-subtitle">We source, inspect, and ship premium passenger cars, luxury sedans, electric vehicles, and SUVs. Best wholesale rates directly from Incheon & Busan ports.</p>
+                
+                <!-- Hero Search Widget -->
+                <div class="hero-search-widget">
+                    <form id="heroSearchForm" class="hero-search-form" action="inventory.html" method="GET">
+                        <div class="search-group">
+                            <label>Make</label>
+                            <select name="brand" id="heroBrandSelect">
+                                <option value="all">All Brands</option>
+                            </select>
+                        </div>
+                        <div class="search-group">
+                            <label>Model</label>
+                            <select name="model" id="heroModelSelect" disabled>
+                                <option value="all">All Models</option>
+                            </select>
+                        </div>
+                        <div class="search-group">
+                            <label>Max Price</label>
+                            <select name="budgetMax" id="heroPriceSelect">
+                                <option value="999999">Any Price</option>
+                                <option value="5000">Under $5,000</option>
+                                <option value="15000">Under $15,000</option>
+                                <option value="30000">Under $30,000</option>
+                                <option value="50000">Under $50,000</option>
+                                <option value="75000">Under $75,000</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary search-submit-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="hero-ctas" style="margin-top: 20px;">
+                    <a href="/how-it-works" class="btn btn-outline">How We Export <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trust/Stats bar -->
+        <div class="hero-stats">
+            <div class="container stats-grid">
+                <div class="stat-card">
+                    <h3 class="stat-number">10+</h3>
+                    <p class="stat-label">Years of Experience</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">1,500+</h3>
+                    <p class="stat-label">Vehicles Exported</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">150+</h3>
+                    <p class="stat-label">Point Inspection Check</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">100%</h3>
+                    <p class="stat-label">Shipping Insurance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Services / Why Us -->
+    <section id="about" class="why-us section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Why Hamsa Holdings</span>
+                <h2 class="section-title">Your Trusted Korean Export Partner</h2>
+                <p class="section-desc">We bridge the gap between South Korea's massive automotive market and global buyers with transparency, efficiency, and expert coordination.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <h3 class="service-title">Direct Sourcing</h3>
+                    <p class="service-text">Access to major Korean domestic auctions, dealership networks, and manufacturer-direct fleets for the best local pricing.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="service-title">150-Point Inspection</h3>
+                    <p class="service-text">Full diagnostic checks, paint thickness reports, engine diagnostics, and detailed high-resolution video inspect before shipping.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-ship"></i>
+                    </div>
+                    <h3 class="service-title">Safe Logistics & Shipping</h3>
+                    <p class="service-text">Complete RORO (Roll-on/Roll-off) and Container booking coordination. Secure transit documentation, customs clearances, and insurance.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h3 class="service-title">10 Years local Presence</h3>
+                    <p class="service-text">Established business with reliable Korean partners, secure local bank guarantees, and a physical office in South Korea.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Inventory Preview -->
+    <section id="catalog" class="catalog-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Featured Stock</span>
+                <h2 class="section-title">Recently Added Vehicles</h2>
+                <p class="section-desc">A small preview of our live export inventory. View all to use advanced filters.</p>
+            </div>
+
+            <!-- Car Grid -->
+            <div class="car-grid" id="carGrid">
+                <!-- Javascript will render the first few cards here -->
+            </div>
+            
+            <div class="catalog-footer" style="margin-top: 40px; text-align: center;">
+                <a href="/inventory" class="btn btn-primary btn-lg"><i class="fa-solid fa-car"></i> View Full Inventory & Filters</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col-brand">
+                <div class="logo-area">
+                    <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings Logo" class="footer-logo">
+                    <span class="logo-text">HAMSA <span class="accent-text">HOLDINGS</span></span>
+                </div>
+                <p class="footer-tagline">Licensed and professional automobile exporter in South Korea. Exporting quality passenger and luxury cars worldwide.</p>
+                <p class="footer-copyright">&copy; 2026 Hamsa Holdings Co., Ltd. All Rights Reserved. <br>Domain: www.hamsaholdings.com</p>
+            </div>
+            
+            <div class="footer-col-links">
+                <h4>Quick Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about" target="_blank">About Us</a></li>
+                    <li><a href="/inventory">Vehicle Inventory</a></li>
+                    <li><a href="/how-it-works">Export Process</a></li>
+                    <li><a href="/contact">Contact Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col-links">
+                <h4>Popular Brands</h4>
+                <ul class="footer-links-list">
+                    <li><a href="/inventory" onclick="filterByBrand('Genesis')">Genesis Luxury</a></li>
+                    <li><a href="/inventory" onclick="filterByBrand('Hyundai')">Hyundai Cars</a></li>
+                    <li><a href="/inventory" onclick="filterByBrand('Kia')">Kia SUVs & EVs</a></li>
+                    <li><a href="/inventory" onclick="filterByBrand('all')">View All Stock</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vehicle Details Modal -->
+    <div class="modal" id="carModal" aria-hidden="true" role="dialog">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-wrapper">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close details modal">&times;</button>
+            <div class="modal-content-grid" id="modalContent">
+                <!-- Javascript will inject data dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Floating WhatsApp Bubble -->
+    <a href="https://wa.me/+8210-6771-9498" target="_blank" class="whatsapp-bubble" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with us!</span>
+    </a>
+
+    <!-- Scripts -->
+    
+    <script src="/static/app.js"></script>
+    
+    <script>
+        // Only on homepage: render just the first 3 or 4 cars as preview
+        document.addEventListener("DOMContentLoaded", () => {
+            const previewGrid = document.getElementById("carGrid");
+            if (previewGrid && window.CARS_DATA) {
+                // We override the default renderInventory to just show first 3
+                const previewData = window.CARS_DATA.slice(0, 3);
+                // We reuse the existing renderInventory function from app.js
+                // But since app.js runs applyFilters() on load, it will overwrite this.
+                // We handle this by setting a tiny timeout to overwrite it back,
+                // or we just modify app.js to detect if it's on the inventory page.
+                
+                setTimeout(() => {
+                    if(typeof renderInventory === 'function') {
+                        renderInventory(previewData);
+                    }
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
