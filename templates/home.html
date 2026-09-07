@@ -244,7 +244,12 @@
     </a>
 
     <!-- Scripts -->
-    
+    <script src="/static/cars-data.js"></script>
+    <script>
+        {% if CARS %}
+        window.CARS_DATA = {{ CARS | tojson }};
+        {% endif %}
+    </script>
     <script src="/static/app.js"></script>
     
     <script>

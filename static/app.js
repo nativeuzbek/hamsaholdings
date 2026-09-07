@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         budgetMin: 0,
         budgetMax: 999999,
         condition: 'all',
+        status: 'all',
         search: ''
     };
 
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bodyTypeFilter = document.getElementById("bodyTypeFilter");
     const budgetFilter = document.getElementById("budgetFilter");
     const conditionFilter = document.getElementById("conditionFilter");
+    const statusFilter = document.getElementById("statusFilter");
     const resultsCount = document.getElementById("resultsCount");
     const clearFiltersBtn = document.getElementById("clearFiltersBtn");
     
@@ -128,12 +130,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cars.forEach(car => {
             const isNew = car.condition === "New";
+            const isSold = car.status === "Sold";
+            const imgPath = car.image.startsWith('/') ? car.image : ('/' + car.image.replace(/^\/?/, ''));
             const card = document.createElement("div");
-            card.className = "car-card";
+            card.className = `car-card ${isSold ? 'is-sold' : ''}`;
             card.innerHTML = `
                 <div class="car-image-wrapper">
-                    <img src="${car.image}" alt="${car.brand} ${car.model}" class="car-img">
-                    <span class="badge-condition ${isNew ? 'new' : ''}">${car.condition}</span>
+                    <img src="${imgPath}" alt="${car.brand} ${car.model}" class="car-img" loading="lazy">
+                    <div class="badge-status-wrap">
+                        <span class="badge-status ${isSold ? 'sold' : 'available'}">
+                            <i class="fa-solid ${isSold ? 'fa-handshake' : 'fa-circle-check'}"></i> ${isSold ? 'SOTILGAN / SOLD' : 'SOTUVDA'}
+                        </span>
+                        <span class="badge-condition ${isNew ? 'new' : ''}">${car.condition}</span>
+                    </div>
+                    ${isSold ? `
+                        <div class="sold-watermark-ribbon">
+                            <span><i class="fa-solid fa-lock"></i> SOTILGAN</span>
+                        </div>
+                    ` : ''}
                     <span class="badge-fuel">${car.fuel}</span>
                 </div>
                 <div class="car-info">
@@ -157,16 +171,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="car-footer">
                         <div class="price-box">
-                            <span class="price-label">FOB Price</span>
+                            <span class="price-label">${isSold ? 'Sold Price' : 'FOB Price'}</span>
                             <span class="price-amount">${formatPrice(car.price)}</span>
                         </div>
                         <div class="card-actions">
                             <button class="btn-icon-only details-trigger" data-id="${car.id}" title="View Specifications">
                                 <i class="fa-solid fa-circle-info"></i>
                             </button>
-                            <a href="https://wa.me/821012345678?text=${encodeURIComponent(`Hello Hamsa Holdings! I am interested in the ${car.brand} ${car.model} (${car.year}, FOB: ${formatPrice(car.price)}). Please provide more details.`)}" 
-                               target="_blank" class="btn btn-primary" title="Inquire on WhatsApp">
-                                <i class="fa-brands fa-whatsapp"></i> Inquire
+                            <a href="https://wa.me/821067719498?text=${encodeURIComponent(isSold ? `Hello Hamsa Holdings! I saw the exported ${car.brand} ${car.model} (${car.year}). Can you source and export a similar vehicle for me?` : `Hello Hamsa Holdings! I am interested in the ${car.brand} ${car.model} (${car.year}, FOB: ${formatPrice(car.price)}). Please provide more details.`)}" 
+                               target="_blank" class="btn ${isSold ? 'btn-order-similar' : 'btn-primary'}" title="${isSold ? 'Order Similar Vehicle' : 'Inquire on WhatsApp'}">
+                                <i class="fa-brands fa-whatsapp"></i> ${isSold ? 'Order Similar' : 'Inquire'}
                             </a>
                         </div>
                     </div>
@@ -187,6 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Master Filter Logic (unified)
     function applyFilters() {
         let filtered = CARS_DATA.filter(car => {
+            // Status filter (Available vs Sold)
+            if (activeFilters.status !== 'all' && car.status !== activeFilters.status) return false;
             // Brand filter
             if (activeFilters.brand !== 'all' && car.brand !== activeFilters.brand) return false;
             // Body type filter
@@ -198,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Search filter
             if (activeFilters.search) {
                 const q = activeFilters.search.toLowerCase();
-                const searchable = `${car.brand} ${car.model} ${car.year} ${car.fuel} ${car.bodyType || ''} ${car.color}`.toLowerCase();
+                const searchable = `${car.brand} ${car.model} ${car.year} ${car.fuel} ${car.bodyType || ''} ${car.color} ${car.status || ''}`.toLowerCase();
                 if (!searchable.includes(q)) return false;
             }
             return true;
@@ -270,6 +286,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // 4d-2. Status toggle buttons (Available vs Sold)
+    if (statusFilter) {
+        statusFilter.addEventListener('click', (e) => {
+            const btn = e.target.closest('.status-chip');
+            if (!btn) return;
+            setActiveButton(statusFilter, '.status-chip', btn);
+            activeFilters.status = btn.getAttribute('data-status') || 'all';
+            applyFilters();
+        });
+    }
+
     // 4e. Search input (debounced)
     let searchDebounceTimer = null;
     if (searchInput) {
@@ -299,11 +326,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 budgetMin: 0,
                 budgetMax: 999999,
                 condition: 'all',
+                status: 'all',
                 search: ''
             };
 
             // Reset UI – remove .active from all filter buttons
-            document.querySelectorAll('.brand-logo-btn.active, .body-type-btn.active, .budget-chip.active, .toggle-btn.active').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.brand-logo-btn.active, .body-type-btn.active, .budget-chip.active, .toggle-btn.active, .status-chip.active').forEach(btn => btn.classList.remove('active'));
 
             // Set 'all' buttons as active
             const allBrandBtn = document.querySelector('.brand-logo-btn[data-brand="all"]');
@@ -314,6 +342,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (allBudgetBtn) allBudgetBtn.classList.add('active');
             const allCondBtn = document.querySelector('.toggle-btn[data-condition="all"]');
             if (allCondBtn) allCondBtn.classList.add('active');
+            const allStatusBtn = document.querySelector('.status-chip[data-status="all"]');
+            if (allStatusBtn) allStatusBtn.classList.add('active');
 
             // Clear search input
             if (searchInput) searchInput.value = '';

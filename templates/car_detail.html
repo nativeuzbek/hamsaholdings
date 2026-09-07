@@ -80,7 +80,18 @@
                 </div>
                 <h1 class="detail-title">{{ car.year }} {{ car.brand }} {{ car.model }}</h1>
                 <div class="detail-price">${{ "{:,}".format(car.price) }} <span style="font-size: 1rem; color: var(--text-gray); font-weight: normal;">(FOB Korea)</span></div>
-                <span class="feature-tag" style="background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-white);"><i class="fa-solid fa-certificate" style="color: var(--primary-gold); margin-right: 5px;"></i> Condition: {{ car.condition }}</span>
+                <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                    {% if car.status == 'Sold' %}
+                    <span class="feature-tag" style="background: rgba(220, 38, 38, 0.9); color: #ffffff; border: 1px solid rgba(248, 113, 113, 0.6); font-weight: 700;">
+                        <i class="fa-solid fa-lock" style="margin-right: 5px;"></i> SOTILGAN / SOLD
+                    </span>
+                    {% else %}
+                    <span class="feature-tag" style="background: rgba(16, 185, 129, 0.9); color: #ffffff; border: 1px solid rgba(52, 211, 153, 0.6); font-weight: 700;">
+                        <i class="fa-solid fa-circle-check" style="margin-right: 5px;"></i> SOTUVDA / IN STOCK
+                    </span>
+                    {% endif %}
+                    <span class="feature-tag" style="background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-white);"><i class="fa-solid fa-certificate" style="color: var(--primary-gold); margin-right: 5px;"></i> Condition: {{ car.condition }}</span>
+                </div>
             </div>
 
             <div class="detail-grid">
@@ -110,10 +121,16 @@
                     </div>
 
                     <div class="detail-actions">
+                        {% if car.status == 'Sold' %}
+                        <a href="https://wa.me/+8210-6771-9498?text=Hello, I saw that the {{ car.year }} {{ car.brand }} {{ car.model }} (ID: {{ car.id }}) is sold. Can you source and export a similar vehicle for me?" target="_blank" class="btn btn-primary btn-large" style="flex: 1; text-align: center;">
+                            <i class="fa-brands fa-whatsapp"></i> Order Similar Vehicle
+                        </a>
+                        {% else %}
                         <a href="https://wa.me/+8210-6771-9498?text=Hello, I am interested in the {{ car.year }} {{ car.brand }} {{ car.model }} (ID: {{ car.id }}) listed at ${{ car.price }}." target="_blank" class="btn btn-primary btn-large" style="flex: 1; text-align: center;">
                             <i class="fa-brands fa-whatsapp"></i> Inquire Now
                         </a>
-                        <button class="btn btn-secondary btn-large" style="flex: 1;"><i class="fa-solid fa-file-invoice"></i> Request Quote</button>
+                        {% endif %}
+                        <a href="/contact" class="btn btn-secondary btn-large" style="flex: 1; text-align: center; text-decoration: none;"><i class="fa-solid fa-file-invoice"></i> Custom Order Request</a>
                     </div>
                 </div>
             </div>
@@ -127,7 +144,7 @@
                     <img src="/static/images/hamsa_logo.jpg" alt="Hamsa Holdings Logo" class="footer-logo">
                     <span class="logo-text">HAMSA <span class="accent-text">HOLDINGS</span></span>
                 </div>
-                <p class="footer-copyright">&copy; 2026 Hamsa Holdings Co., Ltd.</p>
+                <p class="footer-copyright">&copy; 2024 Hamsa Holdings Co., Ltd. All Rights Reserved.</p>
             </div>
             <div class="footer-col-links">
                 <h4>Quick Navigation</h4>

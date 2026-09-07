@@ -2210,3 +2210,164 @@ h1, h2, h3, h4, h5, h6 {
         grid-template-columns: 1fr;
     }
 }
+
+/* ══════════════════════════════════════════════
+   INVENTORY STATUS FILTER & SOLD BADGES
+   ══════════════════════════════════════════════ */
+.status-filter-row {
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    background: rgba(18, 24, 32, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+}
+
+.status-filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    color: var(--text-gray);
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.status-chip:hover {
+    color: var(--text-white);
+    border-color: var(--text-gray);
+    transform: translateY(-1px);
+}
+
+.status-chip.active {
+    background: linear-gradient(135deg, rgba(229, 184, 66, 0.2), rgba(229, 184, 66, 0.05));
+    border-color: var(--primary-gold);
+    color: var(--primary-gold);
+    box-shadow: 0 0 15px rgba(229, 184, 66, 0.15);
+}
+
+.status-chip.available.active {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(34, 197, 94, 0.05));
+    border-color: #22c55e;
+    color: #22c55e;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+}
+
+.status-chip.sold.active {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(239, 68, 68, 0.05));
+    border-color: #ef4444;
+    color: #ef4444;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+}
+
+/* Card Badges Wrap */
+.badge-status-wrap {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 2;
+}
+
+.badge-status-wrap .badge-condition {
+    position: static;
+}
+
+.badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.badge-status.available {
+    background: rgba(16, 185, 129, 0.9);
+    color: #ffffff;
+    border: 1px solid rgba(52, 211, 153, 0.6);
+}
+
+.badge-status.sold {
+    background: rgba(220, 38, 38, 0.92);
+    color: #ffffff;
+    border: 1px solid rgba(248, 113, 113, 0.7);
+}
+
+/* Sold Out Overlay Ribbon & Card Styling */
+.car-card.is-sold {
+    border-color: rgba(239, 68, 68, 0.35);
+    background: linear-gradient(180deg, rgba(18, 24, 32, 0.95), rgba(12, 16, 22, 0.95));
+}
+
+.car-card.is-sold .car-img {
+    filter: grayscale(35%) brightness(0.85);
+}
+
+.sold-watermark-ribbon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sold-watermark-ribbon span {
+    padding: 8px 24px;
+    background: rgba(220, 38, 38, 0.92);
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transform: rotate(-8deg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.btn-order-similar {
+    background: rgba(229, 184, 66, 0.12);
+    border: 1px solid var(--primary-gold);
+    color: var(--primary-gold);
+    padding: 10px 18px;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.btn-order-similar:hover {
+    background: var(--primary-gold);
+    color: #05070a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(229, 184, 66, 0.3);
+}
+

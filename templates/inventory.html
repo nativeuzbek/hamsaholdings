@@ -201,9 +201,25 @@
                     </div>
                 </div>
 
+                <!-- Status Filter (Available vs Sold) -->
+                <div class="status-filter-row">
+                    <h4 class="filter-section-title"><i class="fa-solid fa-tag"></i> Inventory Status</h4>
+                    <div class="status-filter-chips" id="statusFilter">
+                        <button class="status-chip active" data-status="all">
+                            <i class="fa-solid fa-layer-group"></i> All Vehicles
+                        </button>
+                        <button class="status-chip available" data-status="Available">
+                            <i class="fa-solid fa-circle-check"></i> Available / In Stock
+                        </button>
+                        <button class="status-chip sold" data-status="Sold">
+                            <i class="fa-solid fa-handshake"></i> Sold / Delivered
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Active Filters & Results Count -->
                 <div class="results-bar" id="resultsBar">
-                    <span class="results-count"><strong id="resultsCount">24</strong> vehicles found</span>
+                    <span class="results-count"><strong id="resultsCount">52</strong> vehicles found</span>
                     <button class="clear-filters-btn" id="clearFiltersBtn"><i class="fa-solid fa-xmark"></i> Clear All Filters</button>
                 </div>
             </div>
@@ -273,7 +289,12 @@
     </a>
 
     <!-- Scripts -->
-    
+    <script src="/static/cars-data.js"></script>
+    <script>
+        {% if CARS %}
+        window.CARS_DATA = {{ CARS | tojson }};
+        {% endif %}
+    </script>
     <script src="/static/app.js"></script>
 </body>
 </html>

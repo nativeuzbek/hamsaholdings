@@ -72,17 +72,17 @@
                     </div>
                 </div>
                 <div class="admin-stat-card">
-                    <div class="admin-stat-icon new"><i class="fa-solid fa-certificate"></i></div>
+                    <div class="admin-stat-icon" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;"><i class="fa-solid fa-circle-check"></i></div>
                     <div class="admin-stat-info">
-                        <span class="admin-stat-number">{{ cars|selectattr('condition', 'equalto', 'New')|list|length }}</span>
-                        <span class="admin-stat-label">Yangi</span>
+                        <span class="admin-stat-number">{{ cars|rejectattr('status', 'equalto', 'Sold')|list|length }}</span>
+                        <span class="admin-stat-label">Sotuvda</span>
                     </div>
                 </div>
                 <div class="admin-stat-card">
-                    <div class="admin-stat-icon used"><i class="fa-solid fa-rotate"></i></div>
+                    <div class="admin-stat-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;"><i class="fa-solid fa-handshake"></i></div>
                     <div class="admin-stat-info">
-                        <span class="admin-stat-number">{{ cars|selectattr('condition', 'equalto', 'Used')|list|length }}</span>
-                        <span class="admin-stat-label">Ishlatilgan</span>
+                        <span class="admin-stat-number">{{ cars|selectattr('status', 'equalto', 'Sold')|list|length }}</span>
+                        <span class="admin-stat-label">Sotilgan</span>
                     </div>
                 </div>
                 <div class="admin-stat-card">
@@ -113,6 +113,7 @@
                             <th>Yil</th>
                             <th>Narx</th>
                             <th>Holat</th>
+                            <th>Status</th>
                             <th>Turi</th>
                             <th>Amallar</th>
                         </tr>
@@ -131,6 +132,11 @@
                             <td>
                                 <span class="admin-badge {% if car.condition == 'New' %}badge-new{% else %}badge-used{% endif %}">
                                     {{ car.condition }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="admin-badge {% if car.status == 'Sold' %}badge-sold{% else %}badge-available{% endif %}">
+                                    {{ 'Sotilgan' if car.status == 'Sold' else 'Sotuvda' }}
                                 </span>
                             </td>
                             <td class="admin-td-type">{{ car.bodyType }}</td>

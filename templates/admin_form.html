@@ -110,6 +110,14 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="admin-field">
+                            <label for="status">Savdo holati (Status) *</label>
+                            <select id="status" name="status" required>
+                                <option value="Available" {% if not car or car.status == 'Available' %}selected{% endif %}>Sotuvda (Available)</option>
+                                <option value="Sold" {% if car and car.status == 'Sold' %}selected{% endif %}>Sotilgan (Sold)</option>
+                            </select>
+                        </div>
                     </div>
 
                     <!-- Column 2: Technical -->
