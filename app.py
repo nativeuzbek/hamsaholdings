@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
 from functools import wraps
 import data
 import json
@@ -124,6 +124,10 @@ def car_detail(car_id):
     if not car:
         return "Car not found", 404
     return render_template('car_detail.html', car=car)
+
+@app.route('/images/<path:filename>')
+def serve_images(filename):
+    return send_from_directory(os.path.join(app.root_path, 'static', 'images'), filename)
 
 # ══════════════════════════════════════════════
 #  ADMIN ROUTES

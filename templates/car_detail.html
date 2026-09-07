@@ -83,11 +83,11 @@
                 <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
                     {% if car.status == 'Sold' %}
                     <span class="feature-tag" style="background: rgba(220, 38, 38, 0.9); color: #ffffff; border: 1px solid rgba(248, 113, 113, 0.6); font-weight: 700;">
-                        <i class="fa-solid fa-lock" style="margin-right: 5px;"></i> SOTILGAN / SOLD
+                        <i class="fa-solid fa-lock" style="margin-right: 5px;"></i> SOLD
                     </span>
                     {% else %}
                     <span class="feature-tag" style="background: rgba(16, 185, 129, 0.9); color: #ffffff; border: 1px solid rgba(52, 211, 153, 0.6); font-weight: 700;">
-                        <i class="fa-solid fa-circle-check" style="margin-right: 5px;"></i> SOTUVDA / IN STOCK
+                        <i class="fa-solid fa-circle-check" style="margin-right: 5px;"></i> AVAILABLE
                     </span>
                     {% endif %}
                     <span class="feature-tag" style="background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-white);"><i class="fa-solid fa-certificate" style="color: var(--primary-gold); margin-right: 5px;"></i> Condition: {{ car.condition }}</span>
@@ -96,7 +96,7 @@
 
             <div class="detail-grid">
                 <div class="detail-image">
-                    <img src="/static/{{ car.image }}" alt="{{ car.brand }} {{ car.model }}">
+                    <img src="{% if car.image.startswith('http') %}{{ car.image }}{% elif car.image.startswith('/static/') %}{{ car.image }}{% elif car.image.startswith('static/') %}/{{ car.image }}{% else %}/static/{{ car.image.lstrip('/') }}{% endif %}" alt="{{ car.brand }} {{ car.model }}" onerror="this.onerror=null; this.src='/static/images/hyundai_palisade.jpg';">
                 </div>
                 
                 <div class="detail-info">

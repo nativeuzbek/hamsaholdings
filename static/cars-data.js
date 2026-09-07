@@ -96,7 +96,7 @@ const CARS_DATA = [
       "Multi-Chamber Air Suspension",
       "Rear Seat Massagers"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/genesis_g90.jpg",
     "description": "The ultimate Korean flagship limousine. Unsurpassed tranquility, elite executive comfort, and highest-tier Korean diplomatic luxury."
   },
   {
@@ -195,7 +195,7 @@ const CARS_DATA = [
       "Smart Key with Push Start",
       "Lane Keep Assist"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_sonata.jpg",
     "description": "Sleek and fuel-efficient compact sedan with a striking angular design. A practical daily driver with modern tech features."
   },
   {
@@ -219,7 +219,7 @@ const CARS_DATA = [
       "Wireless Phone Charging",
       "Hyundai SmartSense ADAS"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_sonata.jpg",
     "description": "The reimagined Sonata 'The Edge' brings a futuristic seamless horizon lamp and unmatched mid-size executive sedan refinement."
   },
   {
@@ -244,7 +244,7 @@ const CARS_DATA = [
       "Dual 12.3\" Screens",
       "Rear Executive Comfort Seats"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_sonata.jpg",
     "description": "Korea's number one best-selling premium sedan. Blends royal heritage with high-tech hybrid efficiency and whisper-quiet ride."
   },
   {
@@ -268,7 +268,7 @@ const CARS_DATA = [
       "Heated & Ventilated Seats",
       "HTRAC All-Wheel Drive"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "Global hit compact SUV offering distinctive parametric jewel styling, punchy torque, and remarkable fuel economy."
   },
   {
@@ -317,7 +317,7 @@ const CARS_DATA = [
       "Dual Power Sliding Doors",
       "Smart Power Tailgate"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_staria.jpg",
     "description": "Spaceship-inspired premium MPV. The most luxurious passenger van Korea produces, favored by touring VIPs and big families."
   },
   {
@@ -390,7 +390,7 @@ const CARS_DATA = [
       "Reinforced Leaf Springs",
       "PTO Installed"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_porter.jpg",
     "description": "The workhorse of South Korea. Highly sought after worldwide for bulletproof reliability, cheap maintenance, and tough utility."
   },
   {
@@ -463,7 +463,7 @@ const CARS_DATA = [
       "Smart Cruise Control",
       "Terrain Mode"
     ],
-    "image": "images/kia_ev6.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "Compact crossover balancing bold exterior styling with a tech-forward cabin. Exceptional fuel economy with punchy turbocharged hybrid power."
   },
   {
@@ -488,7 +488,7 @@ const CARS_DATA = [
       "Built-In Air Purifier",
       "Mood Lighting"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/kia_carnival.jpg",
     "description": "Korea's undisputed King of luxury vans. High-roof custom spec with first-class airline seats and personal smart entertainment suite."
   },
   {
@@ -537,7 +537,7 @@ const CARS_DATA = [
       "Panoramic Glass Sunroof",
       "Sport Drive Modes"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/kia_k5.jpg",
     "description": "Aggressive fastback sports sedan silhouette with sharp handling dynamics and class-leading cabin tech."
   },
   {
@@ -561,7 +561,7 @@ const CARS_DATA = [
       "Ergo Motion Seating",
       "Electronic Suspension"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/kia_k5.jpg",
     "description": "Executive mid-luxury sedan with diamond-pattern detailing and whisper-quiet hybrid road manners."
   },
   {
@@ -585,7 +585,7 @@ const CARS_DATA = [
       "Rear Dual VIP Displays",
       "Soft-Close Doors"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/genesis_g90.jpg",
     "description": "Understated ultra-luxury flagship sedan offering German-rivaling craftsmanship at exceptional export value."
   },
   {
@@ -633,7 +633,7 @@ const CARS_DATA = [
       "Heated Steering Wheel",
       "Excellent 15.7 km/L Fuel Economy"
     ],
-    "image": "images/kia_ev6.jpg",
+    "image": "images/chevrolet_spark.jpg",
     "description": "Korea's most beloved city subcompact. Extremely economical to run, easy to park, and ultra-durable for courier or city life."
   },
   {
@@ -657,7 +657,7 @@ const CARS_DATA = [
       "Power Windows",
       "Air Conditioning"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_porter.jpg",
     "description": "Korea's best-selling light commercial truck, essential for small businesses. Legendary durability and low operating costs."
   },
   {
@@ -681,7 +681,7 @@ const CARS_DATA = [
       "Low-Range 4WD",
       "12.3\" Luxury Cockpit"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/ssangyong_torres.jpg",
     "description": "True traditional body-on-frame off-road SUV powered by a monster 3.0L V6 diesel engine. Legendary toughness."
   },
   {
@@ -705,7 +705,7 @@ const CARS_DATA = [
       "Rear Camera",
       "High-Strength Steel Cage"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/chevrolet_spark.jpg",
     "description": "Built at GM Changwon Korea. Compact, exceptionally fuel-efficient, and easy to maintain worldwide."
   },
   {
@@ -729,7 +729,7 @@ const CARS_DATA = [
       "Bose 9-Speaker Audio",
       "Low Tax Bracket"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_sonata.jpg",
     "description": "Mid-size American cruiser built in Korea with impressive highway composure and low-displacement turbo tax savings."
   },
   {
@@ -753,7 +753,7 @@ const CARS_DATA = [
       "Wireless Phone Projection",
       "Active Noise Cancellation"
     ],
-    "image": "images/kia_ev6.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "Massive global export sensation assembled in Bupyeong, Korea. Athletic crossover styling with unmatched cost-to-feature value."
   },
   {
@@ -777,7 +777,7 @@ const CARS_DATA = [
       "Hands-Free Power Liftgate",
       "Panoramic Sunroof"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "Punchy Korean-built compact crossover featuring rugged two-tone adventure styling and smart switchable AWD."
   },
   {
@@ -801,7 +801,7 @@ const CARS_DATA = [
       "Spray-On Bedliner",
       "Heavy-Duty Towing Package"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_porter.jpg",
     "description": "Authentic American mid-size pickup widely driven and serviced in Korea. Robust 3.6L V6 engine ready for heavy payload."
   },
   {
@@ -825,7 +825,7 @@ const CARS_DATA = [
       "Massage Front Seats",
       "LED Pure Vision Headlamps"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_sonata.jpg",
     "description": "French elegance engineered in Busan, South Korea. Known for supreme high-speed stability and luxurious quiet cabin."
   },
   {
@@ -849,7 +849,7 @@ const CARS_DATA = [
       "Hands-Free Tailgate",
       "Low Fuel Cost"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "South Korea's most popular family SUV with patented donut LPG technology. Unrivaled fuel budget savings with quiet refinement."
   },
   {
@@ -897,7 +897,7 @@ const CARS_DATA = [
       "703L Massive Trunk Space",
       "Smart AWD Lock"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/ssangyong_torres.jpg",
     "description": "KGM's breakthrough authentic SUV. Bold retro off-road grille inspired by adventure expeditions."
   },
   {
@@ -921,7 +921,7 @@ const CARS_DATA = [
       "3-Ton Towing Capacity",
       "Diamond Quilted Interior"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/ssangyong_torres.jpg",
     "description": "Full-size flagship quad-frame SUV offering unmatched towing strength, high-grade leather, and military-grade durability."
   },
   {
@@ -945,7 +945,7 @@ const CARS_DATA = [
       "Heavy Duty Coil Springs",
       "5-Passenger Spacious Crew Cab"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_porter.jpg",
     "description": "Korea's number one heavy-duty diesel utility pickup. Built on ultra-stiff quad chassis ready for agriculture or construction."
   },
   {
@@ -969,7 +969,7 @@ const CARS_DATA = [
       "Smart Key Entry",
       "Comfortable High Seating"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/chevrolet_spark.jpg",
     "description": "Affordable and stylish compact SUV with high visibility, spacious rear row, and easy parts availability."
   },
   {
@@ -993,7 +993,7 @@ const CARS_DATA = [
       "Harman Kardon Surround",
       "Driving Assistant Professional"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/bmw_5series.jpg",
     "description": "Sourced from high-grade Korean corporate fleet. Immaculate service record with renowned German highway dynamics."
   },
   {
@@ -1041,7 +1041,7 @@ const CARS_DATA = [
       "Laser Headlights",
       "Outstanding 18+ km/L Fuel Economy"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/bmw_5series.jpg",
     "description": "Iconic sports sedan with razor-sharp balance and exceptional real-world diesel long-distance cruising range."
   },
   {
@@ -1065,7 +1065,7 @@ const CARS_DATA = [
       "64-Color Ambient Mood Lights",
       "Burmester Audio"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/mercedes_eclass.jpg",
     "description": "South Korea is the #1 market globally for the E-Class. Kept in pristine underground garage condition with total luxury poise."
   },
   {
@@ -1089,7 +1089,7 @@ const CARS_DATA = [
       "Panoramic Sliding Roof",
       "Digital Light System"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "Sophisticated compact luxury SUV uniting athletic stance with intuitive MBUX intelligence and confident AWD traction."
   },
   {
@@ -1113,7 +1113,7 @@ const CARS_DATA = [
       "3D Drivers Display",
       "Active Ambient Air Purifier"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/mercedes_eclass.jpg",
     "description": "The pinnacle of executive prestige. Long-wheelbase luxury chariot preserved to highest standards in Korea."
   },
   {
@@ -1137,7 +1137,7 @@ const CARS_DATA = [
       "Digital Cockpit Pro",
       "Electric Easy Open Tailgate"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "German family practicality with renowned high-torque TDI engine and bulletproof 7-speed DSG transmission."
   },
   {
@@ -1161,7 +1161,7 @@ const CARS_DATA = [
       "Dynaudio Premium Sound",
       "DCC Adaptive Chassis"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/bmw_5series.jpg",
     "description": "Breathtaking 5-door gran turismo coupe styling with massive liftback cargo practicality and 4MOTION grip."
   },
   {
@@ -1185,7 +1185,7 @@ const CARS_DATA = [
       "EV Drive Mode",
       "Astonishing 20 km/L Real World Economy"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_sonata.jpg",
     "description": "The gold standard of bulletproof hybrid engineering. Trusted worldwide for 500,000+ km service life without breakdown."
   },
   {
@@ -1209,7 +1209,7 @@ const CARS_DATA = [
       "Pre-Collision System",
       "Spacious 580L Cargo Trunk"
     ],
-    "image": "images/hyundai_palisade.jpg",
+    "image": "images/hyundai_tucson.jpg",
     "description": "World's favorite hybrid SUV. Capable all-weather electronic 4WD with legendary Japanese reliability."
   },
   {
@@ -1233,7 +1233,7 @@ const CARS_DATA = [
       "Variable Exhaust Valve System",
       "N Light Bucket Seats"
     ],
-    "image": "images/genesis_g80.jpg",
+    "image": "images/hyundai_sonata.jpg",
     "description": "Track-ready street weapon developed on the Nurburgring. Pops, crackles, and blistering cornering precision."
   },
   {
@@ -1257,7 +1257,7 @@ const CARS_DATA = [
       "Surprising Limousine Rear Legroom",
       "City Parking Discount"
     ],
-    "image": "images/kia_ev6.jpg",
+    "image": "images/chevrolet_spark.jpg",
     "description": "Korea's iconic Kei-style box mini car. Features a magical pillarless sliding door and cavernous interior room in a compact footprint."
   }
 ];

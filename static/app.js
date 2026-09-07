@@ -131,21 +131,26 @@ document.addEventListener("DOMContentLoaded", () => {
         cars.forEach(car => {
             const isNew = car.condition === "New";
             const isSold = car.status === "Sold";
-            const imgPath = car.image.startsWith('/') ? car.image : ('/' + car.image.replace(/^\/?/, ''));
+            let imgPath = car.image;
+            if (!imgPath.startsWith('http')) {
+                if (!imgPath.startsWith('/static/')) {
+                    imgPath = '/static/' + imgPath.replace(/^\/?/, '');
+                }
+            }
             const card = document.createElement("div");
             card.className = `car-card ${isSold ? 'is-sold' : ''}`;
             card.innerHTML = `
                 <div class="car-image-wrapper">
-                    <img src="${imgPath}" alt="${car.brand} ${car.model}" class="car-img" loading="lazy">
+                    <img src="${imgPath}" alt="${car.brand} ${car.model}" class="car-img" loading="lazy" onerror="this.onerror=null; this.src='/static/images/hyundai_palisade.jpg';">
                     <div class="badge-status-wrap">
                         <span class="badge-status ${isSold ? 'sold' : 'available'}">
-                            <i class="fa-solid ${isSold ? 'fa-handshake' : 'fa-circle-check'}"></i> ${isSold ? 'SOTILGAN / SOLD' : 'SOTUVDA'}
+                            <i class="fa-solid ${isSold ? 'fa-handshake' : 'fa-circle-check'}"></i> ${isSold ? 'SOLD' : 'AVAILABLE'}
                         </span>
                         <span class="badge-condition ${isNew ? 'new' : ''}">${car.condition}</span>
                     </div>
                     ${isSold ? `
                         <div class="sold-watermark-ribbon">
-                            <span><i class="fa-solid fa-lock"></i> SOTILGAN</span>
+                            <span><i class="fa-solid fa-lock"></i> SOLD</span>
                         </div>
                     ` : ''}
                     <span class="badge-fuel">${car.fuel}</span>
@@ -375,9 +380,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const isNew = car.condition === "New";
         const whatsappMsg = `Hello Hamsa Holdings! I would like to query export details for the vehicle: ${car.brand} ${car.model} (${car.year}, Ref: ${car.id}). Details: FOB ${formatPrice(car.price)}, Mileage ${formatMileage(car.mileage)}.`;
         
+        let modalImgPath = car.image;
+        if (!modalImgPath.startsWith('http')) {
+            if (!modalImgPath.startsWith('/static/')) {
+                modalImgPath = '/static/' + modalImgPath.replace(/^\/?/, '');
+            }
+        }
+
         modalContent.innerHTML = `
             <div class="modal-img-container">
-                <img src="${car.image}" alt="${car.brand} ${car.model}">
+                <img src="${modalImgPath}" alt="${car.brand} ${car.model}" onerror="this.onerror=null; this.src='/static/images/hyundai_palisade.jpg';">
             </div>
             <div class="modal-details">
                 <span class="modal-brand">${car.brand}</span>
@@ -432,7 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <p class="modal-desc">${car.description}</p>
 
-                <a href="https://wa.me/821012345678?text=${encodeURIComponent(whatsappMsg)}" 
+                <a href="https://wa.me/821067719498?text=${encodeURIComponent(whatsappMsg)}" 
                    target="_blank" class="btn btn-primary btn-full-width">
                     <i class="fa-brands fa-whatsapp"></i> Start WhatsApp Export Inquiry
                 </a>
@@ -479,7 +491,7 @@ Details:
 - Requested Car: ${carRequest}
 - Extra Info: ${message}`;
 
-        const whatsappURL = `https://wa.me/821012345678?text=${encodeURIComponent(textMsg)}`;
+        const whatsappURL = `https://wa.me/821067719498?text=${encodeURIComponent(textMsg)}`;
         
         // Open WhatsApp chat in a new tab
         window.open(whatsappURL, "_blank");
