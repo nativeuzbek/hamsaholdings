@@ -140,7 +140,7 @@ Details:
                   <h4 style={{ color: 'var(--text-white)', fontSize: '1.1rem', marginBottom: '4px' }}>
                     {t.contact.emailTitle}
                   </h4>
-                  <p style={{ color: 'var(--text-gray)', fontSize: '0.95rem' }}>info@hamsaholdings.com</p>
+                  <p style={{ color: 'var(--text-gray)', fontSize: '0.95rem' }}>tim@hamsaholdings.com</p>
                 </div>
               </div>
 

@@ -251,7 +251,7 @@ export const Footer: React.FC = () => {
           </div>
           <div className="footer-contact-item">
             <i className="fa-solid fa-envelope"></i>
-            <span>info@hamsaholdings.com</span>
+            <span>tim@hamsaholdings.com</span>
           </div>
           <div className="footer-contact-item" style={{ marginTop: '16px' }}>
             <Link
