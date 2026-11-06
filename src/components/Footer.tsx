@@ -250,12 +250,6 @@ export const Footer: React.FC = () => {
             <span>Haengdang-dong 317-189 3rd floor, Seongdong-gu, Seoul, Republic of Korea</span>
           </div>
           <div className="footer-contact-item">
-            <i className="fa-brands fa-whatsapp"></i>
-            <a href="https://wa.me/821067719498" target="_blank" rel="noopener noreferrer">
-              +82 10-6771-9498
-            </a>
-          </div>
-          <div className="footer-contact-item">
             <i className="fa-solid fa-envelope"></i>
             <span>info@hamsaholdings.com</span>
           </div>

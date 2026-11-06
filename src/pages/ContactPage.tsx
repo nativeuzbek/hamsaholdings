@@ -113,7 +113,7 @@ Details:
                     rel="noopener noreferrer"
                     style={{ color: 'var(--primary-gold)', fontSize: '1.05rem', fontWeight: 600 }}
                   >
-                    +82 10-6771-9498
+                    Online Inquiry
                   </a>
                 </div>
               </div>
