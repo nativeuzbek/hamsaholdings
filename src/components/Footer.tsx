@@ -279,7 +279,7 @@ export const Footer: React.FC = () => {
 
       <div className="footer-bottom">
         <div className="container footer-bottom-container">
-          <p>&copy; {new Date().getFullYear()} Hamsa Holdings. All Rights Reserved. Seoul, South Korea.</p>
+          <p>&copy; 2022 Hamsa Holdings Co., Ltd. All Rights Reserved. Seoul, South Korea.</p>
           <div className="footer-legal">
             <Link to="/how-it-works">Export Terms</Link>
             <Link to="/shipping">Shipping Policy</Link>
